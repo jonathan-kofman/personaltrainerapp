@@ -11,8 +11,6 @@ import {
   SafeAreaView
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../firebase/config';
 
 interface Trainer {
   id: string;
@@ -46,29 +44,53 @@ const TrainersList: React.FC<TrainersListProps> = ({ onBack, onTrainerSelect }) 
     try {
       setLoading(true);
       
-      // Fetch approved trainers from Firebase
-      const trainersRef = collection(db, 'trainers');
-      const q = query(trainersRef, where('isApproved', '==', true));
-      const querySnapshot = await getDocs(q);
+      // Mock trainers data (replace with Supabase integration)
+      const mockTrainers: Trainer[] = [
+        {
+          id: '1',
+          name: 'Sarah Johnson',
+          photo: 'https://via.placeholder.com/80',
+          rating: 4.8,
+          totalReviews: 127,
+          specialties: ['Weight Training', 'Cardio', 'Nutrition'],
+          hourlyRate: 75,
+          experience: '5 years',
+          isOnline: true,
+          isVerified: true,
+          distance: 2.5
+        },
+        {
+          id: '2',
+          name: 'Mike Chen',
+          photo: 'https://via.placeholder.com/80',
+          rating: 4.6,
+          totalReviews: 89,
+          specialties: ['Yoga', 'Pilates', 'Flexibility'],
+          hourlyRate: 65,
+          experience: '3 years',
+          isOnline: false,
+          isVerified: true,
+          distance: 1.8
+        },
+        {
+          id: '3',
+          name: 'Alex Rodriguez',
+          photo: 'https://via.placeholder.com/80',
+          rating: 4.9,
+          totalReviews: 203,
+          specialties: ['CrossFit', 'Strength Training', 'Sports Performance'],
+          hourlyRate: 85,
+          experience: '7 years',
+          isOnline: true,
+          isVerified: true,
+          distance: 3.2
+        }
+      ];
       
-      const trainersData: Trainer[] = querySnapshot.docs.map(doc => {
-        const data = doc.data();
-        return {
-          id: doc.id,
-          name: data.name || '',
-          photo: data.photo || 'https://via.placeholder.com/80',
-          rating: data.rating || 0,
-          totalReviews: data.totalReviews || 0,
-          specialties: data.specialties || [],
-          hourlyRate: data.hourlyRate || 0,
-          experience: data.experience || '',
-          isOnline: data.isOnline || false,
-          isVerified: data.isVerified || false,
-          distance: data.distance || 0
-        };
-      });
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      setTrainers(trainersData);
+      setTrainers(mockTrainers);
       
     } catch (error) {
       console.error('Error loading trainers:', error);

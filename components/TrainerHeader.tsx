@@ -35,6 +35,7 @@ const TrainerHeader: React.FC<TrainerHeaderProps> = ({
         'Profile': 'profile',
         'Settings': 'settings',
         'Trainers': 'trainers',
+        'Analytics': 'analytics',
       };
       const pageKey = pageMap[option];
       if (pageKey) {
@@ -63,6 +64,7 @@ const TrainerHeader: React.FC<TrainerHeaderProps> = ({
       'profile': 'Profile',
       'settings': 'Settings',
       'trainers': 'Personal Trainers',
+      'analytics': 'Analytics',
     };
     return titleMap[currentPage] || 'TrainerX Pro';
   };
@@ -131,6 +133,12 @@ const TrainerHeader: React.FC<TrainerHeaderProps> = ({
               onPress={() => handleOptionPress('Trainers')}
             >
               <Text style={styles.dropdownItemText}>Personal Trainers</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.dropdownItem}
+              onPress={() => handleOptionPress('Analytics')}
+            >
+              <Text style={styles.dropdownItemText}>Analytics</Text>
             </TouchableOpacity>
             <View style={styles.dropdownDivider} />
             <TouchableOpacity 

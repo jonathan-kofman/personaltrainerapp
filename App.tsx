@@ -20,6 +20,7 @@ import SettingsPage from './components/SettingsPage';
 import OnlineToggle from './components/OnlineToggle';
 import LocationTracker from './components/LocationTracker';
 import TrainersList from './components/TrainersList';
+import AnalyticsDashboard from './components/AnalyticsDashboard';
 
 const MainTrainerApp: React.FC = () => {
   const { state: authState, logout } = useAuth();
@@ -30,7 +31,7 @@ const MainTrainerApp: React.FC = () => {
   const [currentLocation, setCurrentLocation] = useState<{latitude: number, longitude: number} | null>(null);
   
   // App navigation state
-  const [currentPage, setCurrentPage] = useState<'dashboard' | 'profile' | 'bookings' | 'clients' | 'schedule' | 'earnings' | 'settings' | 'trainers'>('dashboard');
+  const [currentPage, setCurrentPage] = useState<'dashboard' | 'profile' | 'bookings' | 'clients' | 'schedule' | 'earnings' | 'settings' | 'trainers' | 'analytics'>('dashboard');
   
   // Data state
   const [bookingRequests, setBookingRequests] = useState<BookingRequest[]>([]);
@@ -411,6 +412,12 @@ const MainTrainerApp: React.FC = () => {
                 `You selected ${trainer.name}. This would open the trainer's detailed profile.`
               );
             }}
+          />
+        );
+      case 'analytics':
+        return (
+          <AnalyticsDashboard 
+            onBack={() => setCurrentPage('dashboard')}
           />
         );
       default:
